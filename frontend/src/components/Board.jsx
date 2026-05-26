@@ -1,10 +1,8 @@
-import React from 'react';
 import { 
   DndContext, 
   PointerSensor, 
   useSensor, 
-  useSensors,
-  DragOverlay
+  useSensors
 } from '@dnd-kit/core';
 import toast from 'react-hot-toast';
 import Column from './Column';

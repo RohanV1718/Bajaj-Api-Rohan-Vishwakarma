@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { FiPlus, FiFilter, FiActivity, FiRefreshCw, FiAlertTriangle } from 'react-icons/fi';
 import client from './api/client';
@@ -15,7 +15,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [statsLoading, setStatsLoading] = useState(true);
 
-  const fetchTickets = async () => {
+  const fetchTickets = useCallback(async () => {
     setLoading(true);
     try {
       const params = {};
@@ -31,9 +31,9 @@ const App = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [priorityFilter, breachedFilter]);
 
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     setStatsLoading(true);
     try {
       const response = await client.get('/tickets/stats');
@@ -45,17 +45,19 @@ const App = () => {
     } finally {
       setStatsLoading(false);
     }
-  };
+  }, []);
 
   // Fetch tickets when filters change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchTickets();
-  }, [priorityFilter, breachedFilter]);
+  }, [fetchTickets]);
 
   // Initial load
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchStats();
-  }, []);
+  }, [fetchStats]);
 
   const handleTicketCreated = (newTicket) => {
     // Append the new ticket to state immediately (if it matches priority filter)

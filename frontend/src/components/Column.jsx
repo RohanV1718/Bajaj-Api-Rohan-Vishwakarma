@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import { FiCheckSquare, FiInbox } from 'react-icons/fi';
 import TicketCard from './TicketCard';

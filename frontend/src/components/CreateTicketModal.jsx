@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FiX, FiMail, FiFileText, FiAlertCircle } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import client from '../api/client';
